@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Saga(Homepage)</title>
+	<link href="style1.css" rel="stylesheet">
+
+</head>
+<body>
+	<header class="header">
+		<div class="left-section">
+		     <img class="hamburger-menu" src="hamburger-menu.svg">
+             <img class="logo" src="logo.jpeg">
+		</div>
+		<div class="middle-section">
+          <input class="search-bar" id="searchBar" type="text" placeholder="Search" onkeyup="searchBook()">
+          <button class="search-button tooltip-container">
+            <img src="search.svg">
+          </button>
+        </div>
+		<div class="right-section">
+        <form id="loginForm" action="login.jsp">
+             <button class="button">Login/Register</button>
+            </form>
+         <button id="logoutButton" class="button" type="button" style="display:none;" onclick="logoutUser()">Logout</button> 
+		  </div>
+        </div>
+	</header>
+	<nav class="sidebar">
+          <a href="#" class="btn" data-filter="home">Home</a>
+		  <a href="#" class="btn" data-filter="novel">Novels</a>
+          <a href="#" class="btn" data-filter="comic">Comics</a>
+          <a href="#" class="bkm" onclick="return showSaved(event)">Saved</a>
+	</nav>
+    <main>
+        <div class="grids" id="allItems">
+             <div class="content novel" data-id="1">
+                 <a href="readpage.html?id=1" class="a">
+                   <img src="tgcf.jpg" class="mimg">
+                   <h3>Heaven Official's Blessing</h3>
+                   <h6>Novel</h6>
+                 </a>
+            </div>
+            <div class="content comic" data-id="2">
+                 <a href="mdzs.html?id=2" class="a">
+                   <img src="lan zhan.jpg" class="mimg">
+                   <h3>Grandmaster of Demonic Cultivation</h3>
+                   <h6>Comic</h6>
+                 </a>
+            </div>
+            <div class="content novel" data-id="3">
+                 <a href="daughterofmoongoddess.html?id=3" class="a">
+                   <img src="daughter-of-the-moon-goddess.jpeg" class="mimg">
+                   <h3>Daughter of the Moon Goddess</h3>
+                   <h6>Novel</h6>
+                 </a>
+            </div>
+            
+            <div class="content comic" data-id="4">
+                 <a href="summerhikaru.html?id=4" class="a">
+                   <img src="The_Summer_Hikaru_Died.jpg" class="mimg">
+                   <h3>The Summer Hikaru Died</h3>
+                   <h6>Comic</h6>
+                 </a>
+            </div>
+            <div class="content novel" data-id="5">
+                 <a href="worldofwonders.html?id=5" class="a">
+                   <img src="world-of-wonders.jpeg" class="mimg">
+                   <h3>In the World of Wonders</h3>
+                   <h6>Novel</h6>
+                 </a>
+            </div>
+            <div class="content comic" data-id="6">
+                 <a href="ourdreams.html?id=6" class="a">
+                   <img src="ourdreams.jpg" class="mimg">
+                   <h3>Our Dreams at Dusk Volume 1</h3>
+                   <h6>Comic</h6>
+                 </a>
+            </div>
+             <div class="content novel" data-id="7">
+                  <a href="soulandmind.html?id=7" class="a">
+                   <img src="to.jpg" class="mimg">
+                   <h3>How to Kill a Mockingbird</h3>
+                   <h6>Novel</h6>
+                  </a>
+            </div>
+            <div class="content comic" data-id="8">
+                  <a href="yurionice.html?id=8" class="a">
+                   <img src="yuri on ice.jpg" class="mimg">
+                   <h3>Yuri on Ice : First Volume </h3>
+                   <h6>Comic</h6>
+                  </a>
+            </div>
+             <div class="content novel" data-id="9">
+                 <a href="seethesun.html?id=9" class="a">
+                   <img src="if u could.jpg" class="mimg">
+                   <h3>If You Could See the Sun</h3>
+                   <h6>Novel</h6>
+                 </a>
+            </div>
+            <div class="content comic" data-id="10">
+                  <a href="greenyuri.html?id=10" class="a">
+                   <img src="green yuri.jpg" class="mimg">
+                   <h3>The Guy She Was Interested In?</h3>
+                   <h6>Comic</h6>
+                 </a>
+            </div>
+        </div>
+    </main>
+<script>
+function searchBook(){
+    var input = document.getElementById("searchBar").value.toLowerCase();
+    var items = document.getElementsByClassName("content");
+
+    for(var i=0;i<items.length;i++){
+        var title = items[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
+
+        if(title.includes(input)){
+            items[i].style.display = "block";
+        }else{
+            items[i].style.display = "none";
+        }
+    }
+}
+function filterContents(filter) {
+    const contents = document.querySelectorAll(".content");
+
+    for (let i = 0; i < contents.length; i++) {
+        if (filter === "home") {
+            contents[i].style.display = "block"; 
+        } else if (contents[i].classList.contains(filter)) {
+            contents[i].style.display = "block";
+        } else {
+            contents[i].style.display = "none";
+        }
+    }
+}
+
+const buttons = document.querySelectorAll(".btn");
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function(e) {
+        e.preventDefault();
+        const filter = this.getAttribute("data-filter");
+        filterContents(filter);
+    });
+}
+
+function logoutUser() {
+    fetch("logout.jsp", { method: "POST" })
+      .then(function () {
+          localStorage.removeItem("savedItems");
+          alert("Logged out");
+          window.location.reload();
+      })
+      .catch(function () {
+          alert("Logout failed");
+      });
+}
+
+function updateAuthButtons() {
+    var loginForm = document.getElementById("loginForm");
+    var logoutButton = document.getElementById("logoutButton");
+
+    if (!loginForm || !logoutButton) {
+        return;
+    }
+
+    loginForm.style.display = "block";
+    logoutButton.style.display = "none";
+
+    fetch("session-status.jsp", { cache: "no-store" })
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error("HTTP error");
+            }
+            return response.json();
+        })
+        .then(function(data) {
+            var isLoggedIn = (data.loggedIn === true || data.loggedIn === "true");
+            loginForm.style.display = isLoggedIn ? "none" : "block";
+            logoutButton.style.display = isLoggedIn ? "block" : "none";
+        })
+        .catch(function() {
+            loginForm.style.display = "block";
+            logoutButton.style.display = "none";
+        });
+}
+
+function showSaved(event) {
+	 event.preventDefault();
+
+	    fetch("session-status.jsp", { cache: "no-store" })
+	        .then(function(response) {
+	        	if (!response.ok) {
+	                throw new Error("HTTP error");
+	            }
+	            return response.json();
+	        })
+	        .then(function(data) {
+	            var isLoggedIn = (data.loggedIn === true || data.loggedIn === "true");
+                if (!isLoggedIn) {
+	                alert("You can only save when you login.");
+	                return;
+	            }
+    const saved = JSON.parse(localStorage.getItem("savedItems")) || [];
+    const contents = document.querySelectorAll(".content");
+    
+    if (saved.length === 0) {
+        alert("No saved items yet.");
+    }
+    for (let i = 0; i < contents.length; i++) {
+        const itemId = contents[i].getAttribute("data-id");
+        if (saved.includes(itemId)) {
+            contents[i].style.display = "block";
+        } else {
+            contents[i].style.display = "none";
+        }
+    }
+})
+	        .catch(function() {
+	            alert("Could not check login status.");
+	        });
+
+	    return false;
+	}
+document.addEventListener("DOMContentLoaded", function() {
+    updateAuthButtons();
+});
+</script>
+</body>
+</html>

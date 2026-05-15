@@ -1,0 +1,133 @@
+*{
+    margin: 0;
+}
+body{
+        background-color: rgb(255, 226, 231);
+}
+
+.header{
+    display: flex;
+    height: 108px;
+    justify-content: space-between;
+    align-items: center;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    background-color: rgb(247, 209, 215);
+    z-index: 5;
+}
+.left-section {
+    display: flex;
+    align-items: center;
+}
+.left-section .logo{
+    height:50px;
+    margin-left: 80px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.container{
+    display: grid;
+    margin-top: 160px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-bottom: 50px;
+    grid-template-columns: 2.8fr 1fr;
+    column-gap: 100px;
+}
+.up-container{
+    min-width: 550px;
+}
+.image{
+    margin-top: 20px;
+    margin-left: 20px;
+    display:flex;
+    height:350px;
+    width:235px;
+    border-radius: 25px;
+}
+.details-container{
+    background-color: rgb(247, 209, 215);
+    padding-bottom: 18px;
+    border-radius: 30px;
+    color: rgb(156, 75, 89) ;
+    display:flex;
+
+}
+.details{
+    margin-left: 25px;
+    margin-top: 35px ;
+    display:block;
+    position: relative;
+}
+
+.summary{
+    margin-top: 30px;
+    background-color: rgb(247, 209, 215);
+    padding: 20px 20px 20px 20px;
+    border-radius: 30px;
+    color: rgb(156, 75, 89) ;
+
+
+}
+.support{
+    background-color: rgb(247, 209, 215);
+    min-width: 200px;
+    border-radius: 30px;
+    padding: 20px 20px 20px 20px;
+    color: rgb(156, 75, 89) ;
+}
+h4{
+    padding-top: 18px;
+    padding-bottom: 15px;
+    font-weight: 100;
+}
+.type{
+    padding-top: 22px;
+    padding-bottom:8px;
+    font-size: 17.7px;
+    font-weight: 100;
+}
+.genre{
+    padding-top: 13px;
+    padding-bottom:7px;
+    font-size: 17.7px;
+    font-weight: 100;
+}
+.readnow{
+    background-color:rgb(246, 194, 208,0.85) ;
+    height: 34px;
+    width: 99px;
+    color: rgb(156, 75, 89) ;
+    font-weight: 12px;
+    text-decoration: solid;
+    border:none;
+    border-radius: 17px;
+    cursor: pointer;
+    margin-top: 12px;
+    margin-left: 1px;
+    border: 1px solid rgb(240, 185, 203);
+    box-shadow: -2px 2px 5px rgb(227, 176, 193);
+}  
+.save{
+    background-color:rgb(246, 194, 208,0.85) ;
+    height: 36px;
+    width: 166px;
+    color: rgb(156, 75, 89) ;
+    font-weight: 12px;
+    text-decoration: solid;
+    border:none;
+    border-radius: 37px;
+    cursor: pointer;
+    margin-top: 25px;
+    border: 1px solid rgb(240, 185, 203);
+    box-shadow: -2px 2px 5px rgb(227, 176, 193);
+
+}
+h4{
+    font-weight: 100;
+    font-size: 17px;
+}
